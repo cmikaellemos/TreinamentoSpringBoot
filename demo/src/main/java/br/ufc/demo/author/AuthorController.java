@@ -1,5 +1,6 @@
 package br.ufc.demo.author;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,21 +22,23 @@ import java.nio.charset.MalformedInputException;
 public class AuthorController {
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorService authorService;
 
     @RequestMapping(
         method = RequestMethod.GET
     )
+    @JsonIgnore
     public Iterable<Author> queryAllAuthors(){
-        return this.authorRepository.findAll();
+        return this.authorService.findAll();
     }
 
     @RequestMapping(
             method = RequestMethod.POST
     )
+    @JsonIgnore
     public ResponseEntity<Void> createAuthor(@RequestBody Author author) throws MalformedInputException, URISyntaxException, MalformedURLException {
-        authorRepository.save(author);
-        URL createdURL = new URL("http://localhost:8080/authors/" + author.getId().toString());
+        this.authorService.create(author);
+        URL createdURL = new URL("http://localhost:8080/authors/" + author.getId());
         return ResponseEntity.created(createdURL.toURI()).build();
     }
 
@@ -44,14 +47,16 @@ public class AuthorController {
             value = "/{id}"
     )
     public Author queryAuthor(@RequestBody Integer id){
-        return this.authorRepository.find(id);
+        return this.authorService.findOne(id);
     }
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = {"/id"}
+            value = {"/{id}"}
     )
-    public void deleteAuthor(Integer id) { authorRepository.delete(id);}
+    public void deleteAuthor(Integer id) {
+        this.authorService.delete(id);
+    }
 
 
 
