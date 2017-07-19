@@ -17,8 +17,8 @@ import java.nio.charset.MalformedInputException;
  * Created by mikaellemos on 17/07/17.
  */
 
-@RestController
-@RequestMapping("/authors")
+//@RestController
+//@RequestMapping("/authors")
 public class AuthorController {
 
     @Autowired
@@ -27,7 +27,6 @@ public class AuthorController {
     @RequestMapping(
         method = RequestMethod.GET
     )
-    @JsonIgnore
     public Iterable<Author> queryAllAuthors(){
         return this.authorService.findAll();
     }

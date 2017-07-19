@@ -1,6 +1,8 @@
 package br.ufc.demo.type;
 
 import br.ufc.demo.publication.Publication;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.util.List;
  * Created by mikaellemos on 18/07/17.
  */
 
+@Data
+@NoArgsConstructor
 @Entity(name="typepub")
 public class TypePub {
 
@@ -24,36 +28,4 @@ public class TypePub {
 
     @OneToMany(mappedBy = "publications", targetEntity = TypePub.class)
     private List<Publication> publications;
-
-    public TypePub() {
-    }
-
-    public TypePub(String nameType, List<Publication> publications) {
-        this.nameType = nameType;
-        this.publications = publications;
-    }
-
-    public Integer getIdType() {
-        return idType;
-    }
-
-    public void setIdType(Integer idType) {
-        this.idType = idType;
-    }
-
-    public String getNameType() {
-        return nameType;
-    }
-
-    public void setNameType(String nameType) {
-        this.nameType = nameType;
-    }
-
-    public List<Publication> getPublications() {
-        return publications;
-    }
-
-    public void setPublications(List<Publication> publications) {
-        this.publications = publications;
-    }
 }

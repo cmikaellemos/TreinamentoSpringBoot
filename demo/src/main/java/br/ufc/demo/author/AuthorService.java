@@ -12,29 +12,29 @@ import java.util.List;
  * Created by mikaellemos on 18/07/17.
  */
 
-@Service
+//@Service
 public class AuthorService{
 
     @Autowired
     private AuthorRepository authorRepository;
 
     public List<Author> findAll(){
-        return authorRepository.findAll();
+        return this.authorRepository.findAll();
     }
 
     public void create(Author author){
-        authorRepository.save(author);
+        this.authorRepository.save(author);
     }
 
     public Author findOne(Integer id){
-        return authorRepository.findOne(id);
+        return this.authorRepository.findOne(id);
     }
 
     public void update(Integer id, String firstName, String lastName){
-       Author tempAuthor = authorRepository.findOne(id);
+       Author tempAuthor = this.authorRepository.findOne(id);
        tempAuthor.setFirstName(firstName);
        tempAuthor.setLastName(lastName);
-       authorRepository.save(tempAuthor);
+       this.authorRepository.save(tempAuthor);
     }
 
     public void delete(Integer id){
