@@ -1,6 +1,7 @@
 package br.ufc.demo.type;
 
 import br.ufc.demo.publication.Publication;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GeneratorType;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name="typepub")
 public class TypePub {
 
@@ -23,9 +24,13 @@ public class TypePub {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idType;
 
-    @Column(name = "name_type")
+    @Column(name = "name_type",
+            unique = true)
     private String nameType;
 
     @OneToMany(mappedBy = "publications", targetEntity = TypePub.class)
     private List<Publication> publications;
+
+    public TypePub() {
+    }
 }

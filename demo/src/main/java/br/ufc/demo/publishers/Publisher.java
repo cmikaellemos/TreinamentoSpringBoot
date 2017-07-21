@@ -1,6 +1,7 @@
 package br.ufc.demo.publishers;
 
-import br.ufc.demo.pubs.Pubs;
+import br.ufc.demo.publication.Publication;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name="publisher")
 public class Publisher {
 
@@ -25,7 +26,13 @@ public class Publisher {
     @Column(name = "name_publisher")
     private String namePublisher;
 
-    @OneToMany(mappedBy = "pubs", targetEntity = Publisher.class)
-    private List<Pubs> pubs;
+    private String city;
 
+    private String country;
+
+    @OneToMany(mappedBy = "publications", targetEntity = Publisher.class)
+    private List<Publication> publications;
+
+    public Publisher() {
+    }
 }
