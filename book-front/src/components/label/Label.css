@@ -1,0 +1,15 @@
+.label- {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    color: #357;
+}
+
+.label-regular {
+    font-weight: lighter;
+}
+
+.label-title {
+    font-size: 14pt;
+    font-weight: bold;
+    display: block;
+}
